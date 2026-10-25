@@ -1,0 +1,6 @@
+{
+  "extends": "@Forma/config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

@@ -1,0 +1,3 @@
+{
+  "extends": "@Forma/config/tsconfig.base.json"
+}
