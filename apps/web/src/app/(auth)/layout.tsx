@@ -12,7 +12,7 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
     <main className="grid min-h-screen grid-cols-1 p-4 sm:p-6 lg:grid-cols-2">
       <section
         aria-label="О Forma"
-        className="relative hidden min-h-0 overflow-hidden rounded-lg bg-[url('/login-background.jpg')] bg-cover bg-center bg-no-repeat lg:block"
+        className="relative hidden min-h-0 overflow-hidden rounded-lg bg-[url('/login-background.webp')] bg-cover bg-center bg-no-repeat lg:block"
       >
         <div aria-hidden="true" className="absolute inset-0 bg-black/50" />
 
