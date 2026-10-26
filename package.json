@@ -57,6 +57,7 @@
   "devDependencies": {
     "@Forma/config": "workspace:*",
     "@types/bun": "catalog:",
+    "husky": "^9.1.7",
     "rolldown": "1.2.15",
     "typescript": "catalog:",
     "varlock": "catalog:",

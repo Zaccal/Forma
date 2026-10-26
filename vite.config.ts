@@ -15,6 +15,9 @@ export default defineConfig({
       typeAware: false,
       typeCheck: false,
     },
+    rules: {
+      "no-console": "warn",
+    },
   },
   fmt: {
     ignorePatterns: [
@@ -26,9 +29,11 @@ export default defineConfig({
       "packages/db/dist/**",
       "packages/db/prisma/generated/**",
     ],
-    singleQuote: false,
-    semi: true,
+    singleQuote: true,
+    jsxSingleQuote: false,
+    semi: false,
     sortPackageJson: true,
+    arrowParens: "avoid",
   },
   staged: {
     "*.{js,ts,jsx,tsx,vue,svelte,json,jsonc,css,md}": "vp check --fix",

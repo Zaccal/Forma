@@ -22,7 +22,7 @@
   "devDependencies": {
     "@Forma/config": "workspace:*",
     "@types/pg": "^8.23.1",
-    "prisma": "^7.10.0",
+    "prisma": "^8.0.0-rc.27",
     "typescript": "catalog:",
     "varlock": "catalog:"
   }
