@@ -42,11 +42,7 @@ export default function RegisterPage() {
   }
 
   function googleAuthHandler() {
-    googleAuthService(() => {
-      toast.success('Аккаунт создан!')
-      router.push('/dashboard')
-      router.refresh()
-    })
+    void googleAuthService()
   }
 
   return (
