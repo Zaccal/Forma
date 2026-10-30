@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@Forma/db": "workspace:*",
+    "@better-auth/i18n": "^1.7.14",
     "better-auth": "catalog:",
     "zod": "catalog:"
   },

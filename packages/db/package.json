@@ -15,14 +15,14 @@
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
-    "@prisma/client": "^7.10.0",
+    "@prisma/client": "7.10.1",
     "pg": "^8.23.0",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@Forma/config": "workspace:*",
     "@types/pg": "^8.23.1",
-    "prisma": "^8.0.0-rc.27",
+    "prisma": "7.10.1",
     "typescript": "catalog:",
     "varlock": "catalog:"
   }

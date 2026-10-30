@@ -1,4 +1,4 @@
-import { Controller, type UseFormReturn } from 'react-hook-form'
+import { Controller, useFormState, type UseFormReturn } from 'react-hook-form'
 import type { RegisterSchema } from '../schemas/register.schema'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@Forma/ui/components/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@Forma/ui/components/input-group'
@@ -14,6 +14,9 @@ interface RegisterFormFieldsProps {
 export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
   const [isVisible, toggleVisible] = useBoolean(false)
   const [isVisibleComfirm, toggleVisibleComfirm] = useBoolean(false)
+  const { isSubmitting } = useFormState({
+    control: form.control,
+  })
 
   return (
     <>
@@ -28,6 +31,7 @@ export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
                 <InputGroupInput
                   {...field}
                   id="register-form-name"
+                  disabled={isSubmitting}
                   type="text"
                   placeholder="Введите имя пользователя"
                   aria-invalid={fieldState.invalid}
@@ -51,6 +55,8 @@ export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
                   {...field}
                   id="register-form-email"
                   type="email"
+
+                  disabled={isSubmitting}
                   placeholder="Введите почту"
                   aria-invalid={fieldState.invalid}
                 />
@@ -72,6 +78,8 @@ export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
                 <InputGroupInput
                   {...field}
                   type={!isVisible ? 'password' : 'text'}
+
+                  disabled={isSubmitting}
                   id="register-form-password"
                   placeholder="Введите пароль"
                   aria-invalid={fieldState.invalid}
@@ -102,6 +110,8 @@ export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
                   {...field}
                   type={!isVisibleComfirm ? 'password' : 'text'}
                   id="register-form-confirm-password"
+
+                  disabled={isSubmitting}
                   placeholder="Введите пароль"
                   aria-invalid={fieldState.invalid}
                 />

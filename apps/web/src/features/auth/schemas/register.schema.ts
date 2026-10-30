@@ -8,7 +8,6 @@ export const registerSchema = z
     name: z
       .string()
       .check(
-        z.trim(),
         z.maxLength(20, 'Имя пользователя должно содержать не более 20 символов'),
         z.regex(
           USERNAME_REGEX,

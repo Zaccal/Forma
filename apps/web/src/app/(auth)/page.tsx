@@ -1,6 +1,5 @@
 'use client'
 
-import { login } from '@/features/auth/actions/login-action'
 import LoginFormFields from '@/features/auth/components/login-form-fields'
 import { loginSchema, type LoginSchema } from '@/features/auth/schemas/auth.schema'
 import { Button } from '@Forma/ui/components/button'
@@ -8,7 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Form, useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 
 export default function LoginPage() {
   const form = useForm<LoginSchema>({
@@ -21,20 +19,7 @@ export default function LoginPage() {
     },
   })
 
-  async function handleAction(formData: FormData) {
-    toast.promise(login(formData), {
-      success: 'Вы вошли в аккаунт!',
-      error: error => {
-        const errorDescription =
-          error instanceof Error ? error.message : 'Произошла внутренняя ошибка. Попробуйте позже.'
-
-        return {
-          message: 'Ой, ошибка!',
-          description: errorDescription,
-        }
-      },
-    })
-  }
+  async function handleAction(_formData: FormData) {}
 
   return (
     <div>
@@ -66,6 +51,7 @@ export default function LoginPage() {
         <Button
           variant="link"
           render={<Link href={'/register'} />}
+          nativeButton={false}
           disabled={form.formState.isSubmitting}
           className="h-auto p-0 text-sm"
         >

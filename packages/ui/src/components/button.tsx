@@ -57,11 +57,11 @@ function Button({
 }: ButtonProps) {
   return (
     <ButtonPrimitive
+      {...props}
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }), fullWidth ? 'w-full' : '')}
+      className={cn(buttonVariants({ variant, size, className }), fullWidth && 'w-full')}
       disabled={isLoading || disabled}
       aria-busy={isLoading || undefined}
-      {...props}
     >
       {isLoading && <Loader />}
       {children}
