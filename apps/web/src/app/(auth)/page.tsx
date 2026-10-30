@@ -1,14 +1,18 @@
 'use client'
 
 import LoginFormFields from '@/features/auth/components/login-form-fields'
-import { loginSchema, type LoginSchema } from '@/features/auth/schemas/auth.schema'
+import { loginSchema, type LoginSchema } from '@/features/auth/schemas/login.schema'
+import { authClient } from '@/lib/auth-client'
 import { Button } from '@Forma/ui/components/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Form, useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 export default function LoginPage() {
+  const router = useRouter()
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     progressive: true,
@@ -19,7 +23,21 @@ export default function LoginPage() {
     },
   })
 
-  async function handleAction(_formData: FormData) {}
+  async function submitHandler(data: LoginSchema) {
+    const { error } = await authClient.signIn.email(data)
+
+    if (error) {
+      toast.error('Ой ошибка!', {
+        description: error.message,
+      })
+
+      return
+    }
+
+    toast.success('C возвращением!')
+    router.push('/dashboard')
+    router.refresh()
+  }
 
   return (
     <div>
@@ -27,7 +45,7 @@ export default function LoginPage() {
         <h2 className="uppercase font-black text-3xl">С возвращением !</h2>
         <p className="text-muted-foreground">С возвращением! Пожалуйста, введите ваши данные.</p>
       </div>
-      <Form control={form.control} action={handleAction} id="login-form">
+      <form onSubmit={form.handleSubmit(submitHandler)} id="login-form">
         <div className="space-y-4">
           <LoginFormFields form={form} />
 
@@ -44,7 +62,7 @@ export default function LoginPage() {
             Войти через Google
           </Button>
         </div>
-      </Form>
+      </form>
 
       <div className="mt-12 flex items-center justify-center gap-1 text-center text-sm">
         <span>Нет аккаунта?</span>

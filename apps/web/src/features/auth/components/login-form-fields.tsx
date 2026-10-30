@@ -6,7 +6,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@Forma/ui/components/
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@Forma/ui/components/input-group'
 import { IconEye, IconEyeClosed, IconMail } from '@tabler/icons-react'
 import { Controller, type UseFormReturn } from 'react-hook-form'
-import type { LoginSchema } from '@/features/auth/schemas/auth.schema'
+import type { LoginSchema } from '@/features/auth/schemas/login.schema'
 import { useBoolean } from '@/shared/hooks'
 
 interface LoginFormFieldsProps {
