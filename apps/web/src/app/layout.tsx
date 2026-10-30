@@ -1,31 +1,30 @@
-import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import type { Metadata } from 'next'
+import { Inter, Montserrat } from 'next/font/google'
 
-import "../index.css";
-import Providers from "@/components/providers";
+import '../index.css'
+import Providers from '@/components/providers'
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
+  variable: '--font-montserrat',
+  subsets: ['latin', 'cyrillic'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: "Forma",
-  description: "Forma",
-};
+  title: 'Forma',
+  description: 'Forma',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="ru" suppressHydrationWarning>
@@ -35,5 +34,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  );
+  )
 }
