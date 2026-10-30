@@ -9,7 +9,7 @@ const HERO_DESCRIPTION =
 
 export default function Layout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <main className="grid min-h-screen grid-cols-1 p-4 sm:p-6 lg:grid-cols-2">
+    <main className="grid min-h-screen min-w-0 grid-cols-1 p-3 sm:p-6 lg:grid-cols-2">
       <section
         aria-label="О Forma"
         className="relative hidden min-h-0 overflow-hidden rounded-none bg-[url('/login-background.webp')] bg-cover bg-center bg-no-repeat lg:block"
@@ -29,7 +29,9 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
         </div>
       </section>
 
-      <section className="flex min-w-0 items-center justify-center p-4 sm:p-6">{children}</section>
+      <section className="flex min-w-0 items-center justify-center px-1 py-6 sm:p-6">
+        {children}
+      </section>
     </main>
   )
 }

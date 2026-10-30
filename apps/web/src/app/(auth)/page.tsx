@@ -40,9 +40,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div>
-      <div className="space-y-4 mb-8">
-        <h2 className="uppercase font-black text-3xl">С возвращением !</h2>
+    <div className="w-full max-w-md min-w-0">
+      <div className="mb-8 space-y-3 sm:space-y-4">
+        <h2 className="text-2xl font-black uppercase sm:text-3xl">С возвращением!</h2>
         <p className="text-muted-foreground">С возвращением! Пожалуйста, введите ваши данные.</p>
       </div>
       <form onSubmit={form.handleSubmit(submitHandler)} id="login-form">
@@ -56,7 +56,8 @@ export default function LoginPage() {
             type="button"
             disabled={form.formState.isSubmitting}
             fullWidth
-            variant={'outline'}
+            variant="outline"
+            className="h-auto min-h-8 whitespace-normal py-2 text-center leading-4"
           >
             <Image src={'/google-icon.svg'} width={16} height={16} alt="google-icon" />
             Войти через Google
@@ -64,7 +65,7 @@ export default function LoginPage() {
         </div>
       </form>
 
-      <div className="mt-12 flex items-center justify-center gap-1 text-center text-sm">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-1 gap-y-1 text-center text-sm sm:mt-12">
         <span>Нет аккаунта?</span>
         <Button
           variant="link"
