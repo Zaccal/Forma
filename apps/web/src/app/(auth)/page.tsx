@@ -2,6 +2,7 @@
 
 import LoginFormFields from '@/features/auth/components/login-form-fields'
 import { loginSchema, type LoginSchema } from '@/features/auth/schemas/login.schema'
+import { googleAuthService } from '@/features/auth/services/social-auth'
 import { authClient } from '@/lib/auth-client'
 import { Button } from '@Forma/ui/components/button'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -39,6 +40,10 @@ export default function LoginPage() {
     router.refresh()
   }
 
+  function googleAuthHandler() {
+    void googleAuthService()
+  }
+
   return (
     <div className="w-full max-w-md min-w-0">
       <div className="mb-8 space-y-3 sm:space-y-4">
@@ -56,6 +61,7 @@ export default function LoginPage() {
             type="button"
             disabled={form.formState.isSubmitting}
             fullWidth
+            onClick={googleAuthHandler}
             variant="outline"
             className="h-auto min-h-8 whitespace-normal py-2 text-center leading-4"
           >

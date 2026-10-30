@@ -8,6 +8,8 @@ export type AuthConfig = {
   BETTER_AUTH_URL: string
   BETTER_AUTH_SECRET: string
   CORS_ORIGIN: string
+  GOOGLE_CLIENT_ID: string
+  GOOGLE_CLIENT_SECRET: string
 }
 
 const IS_PROD = ENV.NODE_ENV === 'production'
@@ -25,6 +27,12 @@ export function createAuth(
     emailAndPassword: { enabled: true, autoSignIn: true },
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.BETTER_AUTH_URL,
+    socialProviders: {
+      google: {
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+      },
+    },
     advanced: {
       defaultCookieAttributes: {
         sameSite: IS_PROD ? 'none' : 'Lax',

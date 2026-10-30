@@ -2,6 +2,7 @@
 
 import RegisterFormFields from '@/features/auth/components/register-form-fields'
 import { registerSchema, type RegisterSchema } from '@/features/auth/schemas/register.schema'
+import { googleAuthService } from '@/features/auth/services/social-auth'
 import { authClient } from '@/lib/auth-client'
 import { Button } from '@Forma/ui/components/button'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,12 +25,8 @@ export default function RegisterPage() {
     },
   })
 
-  async function submitHandler({ email, name, password }: RegisterSchema) {
-    const { error } = await authClient.signUp.email({
-      email,
-      name,
-      password,
-    })
+  async function submitHandler(data: RegisterSchema) {
+    const { error } = await authClient.signUp.email(data)
 
     if (error) {
       toast.error('Ой ошибка!', {
@@ -42,6 +39,14 @@ export default function RegisterPage() {
     toast.success('Аккаунт создан!')
     router.push('/dashboard')
     router.refresh()
+  }
+
+  function googleAuthHandler() {
+    googleAuthService(() => {
+      toast.success('Аккаунт создан!')
+      router.push('/dashboard')
+      router.refresh()
+    })
   }
 
   return (
@@ -61,6 +66,7 @@ export default function RegisterPage() {
             type="button"
             disabled={form.formState.isSubmitting}
             fullWidth
+            onClick={googleAuthHandler}
             variant="outline"
             className="h-auto min-h-8 whitespace-normal py-2 text-center leading-4"
           >
