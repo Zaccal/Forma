@@ -14,4 +14,8 @@ export async function register(formData: FormData) {
       'Не удалось отправить форму. Пожалуйста, проверьте введенные данные и попробуйте снова',
     )
   }
+
+  // const { } = await authClient.signUp.email({
+  //
+  // })
 }

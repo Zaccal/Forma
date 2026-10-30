@@ -2,7 +2,7 @@ import { Controller, type UseFormReturn } from 'react-hook-form'
 import type { RegisterSchema } from '../schemas/register.schema'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@Forma/ui/components/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@Forma/ui/components/input-group'
-import { IconEye, IconEyeClosed, IconMail } from '@tabler/icons-react'
+import { IconEye, IconEyeClosed, IconMail, IconUser } from '@tabler/icons-react'
 import { Button } from '@Forma/ui/components/button'
 import { Checkbox } from '@Forma/ui/components/checkbox'
 import { useBoolean } from '@/shared/hooks'
@@ -18,6 +18,28 @@ export default function RegisterFormFields({ form }: RegisterFormFieldsProps) {
   return (
     <>
       <FieldGroup>
+        <Controller
+          name="name"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="register-form-name">Имя пользователя</FieldLabel>
+              <InputGroup>
+                <InputGroupInput
+                  {...field}
+                  id="register-form-name"
+                  type="text"
+                  placeholder="Введите имя пользователя"
+                  aria-invalid={fieldState.invalid}
+                />
+                <InputGroupAddon>
+                  <IconUser />
+                </InputGroupAddon>
+              </InputGroup>
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
         <Controller
           name="email"
           control={form.control}

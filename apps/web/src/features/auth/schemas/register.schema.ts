@@ -1,9 +1,21 @@
 import { z } from 'zod/mini'
 
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/
+const USERNAME_REGEX = /^[\p{L}\p{N}_]+$/u
 
 export const registerSchema = z
   .object({
+    name: z
+      .string()
+      .check(
+        z.trim(),
+        z.maxLength(20, 'Имя пользователя должно содержать не более 20 символов'),
+        z.regex(
+          USERNAME_REGEX,
+          'Имя пользователя может содержать только буквы, цифры и нижнее подчёркивание',
+        ),
+      ),
+
     email: z
       .string()
       .check(z.trim())
