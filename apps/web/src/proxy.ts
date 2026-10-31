@@ -1,30 +1,41 @@
-import { authClient } from "@/lib/auth-client";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { authClient } from '@/lib/auth-client'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-const PROTECTED_ROUTES = ["/dashboard"] as const;
-const AUTH_ROUTE = "/";
+const PROTECTED_ROUTES = ['/dashboard'] as const
+const AUTH_ROUTE = '/'
 
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const { pathname } = request.nextUrl
   const session = await authClient.getSession({
     fetchOptions: {
       headers: request.headers,
       throw: true,
     },
-  });
+  })
 
   const isProtectedRoute = PROTECTED_ROUTES.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`),
-  );
+    route => pathname === route || pathname.startsWith(`${route}/`),
+  )
 
   if (isProtectedRoute && !session?.user) {
-    return NextResponse.redirect(new URL(AUTH_ROUTE, request.url));
+    return NextResponse.redirect(new URL(AUTH_ROUTE, request.url))
+  }
+
+  if (isProtectedRoute && session?.user && !session.user.emailVerified) {
+    const verifyUrl = new URL('/verify-email', request.url)
+    verifyUrl.searchParams.set('email', session.user.email)
+    return NextResponse.redirect(verifyUrl)
   }
 
   if (pathname === AUTH_ROUTE && session?.user) {
-    return NextResponse.redirect(new URL(PROTECTED_ROUTES[0], request.url));
+    if (!session.user.emailVerified) {
+      const verifyUrl = new URL('/verify-email', request.url)
+      verifyUrl.searchParams.set('email', session.user.email)
+      return NextResponse.redirect(verifyUrl)
+    }
+    return NextResponse.redirect(new URL(PROTECTED_ROUTES[0], request.url))
   }
 
-  return NextResponse.next();
+  return NextResponse.next()
 }

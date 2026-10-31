@@ -36,9 +36,8 @@ export default function RegisterPage() {
       return
     }
 
-    toast.success('Аккаунт создан!')
-    router.push('/dashboard')
-    router.refresh()
+    toast.success('Код отправлен на вашу почту')
+    router.push(`/verify-email?email=${encodeURIComponent(data.email)}`)
   }
 
   function googleAuthHandler() {

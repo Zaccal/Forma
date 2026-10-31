@@ -38,7 +38,7 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
       <section className="flex min-w-0 items-center justify-center px-1 py-6 sm:p-6">
         <div className="">
           <div className="flex mb-16 mx-auto w-fit lg:hidden items-center gap-2">
-            <Image src={'/logos/favicon.svg'} width={48} height={48} alt="Forma icon" />
+            <Image src={'/logos/favicon.svg'} width={40} height={40} alt="Forma icon" />
             <span className="font-bold text-2xl">Forma</span>
           </div>
           {children}

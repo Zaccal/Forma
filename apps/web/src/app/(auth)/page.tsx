@@ -28,6 +28,15 @@ export default function LoginPage() {
     const { error } = await authClient.signIn.email(data)
 
     if (error) {
+      if (error.code === 'EMAIL_NOT_VERIFIED') {
+        const params = new URLSearchParams({
+          email: encodeURIComponent(data.email),
+        })
+
+        router.push(`/verify-email?${params.toString()}` as `/verify-email?email=${string}`)
+        return
+      }
+
       toast.error('Ой ошибка!', {
         description: error.message,
       })
