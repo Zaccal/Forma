@@ -4,7 +4,7 @@ import { i18n, locales } from '@better-auth/i18n'
 import { betterAuth } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
 import { emailOTP } from 'better-auth/plugins/email-otp'
-import { Resend } from 'resend'
+import { resend } from '../lib/resend'
 
 const IS_PROD = ENV.NODE_ENV === 'production'
 
@@ -23,26 +23,7 @@ export function createAuth(
   database: Database,
   desktopOrigins: readonly string[] = [],
 ) {
-  if (IS_PROD && env.RESEND_FROM_EMAIL.includes('@resend.dev')) {
-    throw new Error('Production email must use a verified sender domain')
-  }
-
-  const resend = new Resend(env.RESEND_API_KEY)
-
-  async function sendAuthEmail(to: string, subject: string, text: string) {
-    const { data, error } = await resend.emails.send({
-      from: env.RESEND_FROM_EMAIL,
-      to,
-      subject,
-      text,
-    })
-
-    if (error) {
-      throw new Error(`Failed to send ${subject} email`)
-    }
-
-    return data
-  }
+  const sendAuthEmail = resend(env)
 
   return betterAuth({
     database: prismaAdapter(database, {
