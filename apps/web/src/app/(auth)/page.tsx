@@ -33,7 +33,7 @@ export default function LoginPage() {
           email: encodeURIComponent(data.email),
         })
 
-        router.push(`/verify-email?${params.toString()}` as `/verify-email?email=${string}`)
+        router.push(`/verify-email?${params.toString()}`)
         return
       }
 

@@ -51,6 +51,21 @@ bun run dev
 Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
 The API is running at [http://localhost:3000](http://localhost:3000).
 
+### Password reset
+
+The sign-in page links to `/forgot-password`. Better Auth sends a one-use reset link through
+Resend, then redirects to `/reset-password` to set the new password. Links expire after one
+hour, and a successful reset revokes existing sessions.
+
+Configure `RESEND_API_KEY` and `RESEND_FROM_EMAIL` in `apps/server/.env`. Use a sender on a
+verified Resend domain for production. `BETTER_AUTH_URL` must point to the public API and
+`CORS_ORIGIN` to the web app's origin (locally `http://localhost:3000` and
+`http://localhost:3001`, respectively). The web app uses `NEXT_PUBLIC_SERVER_URL` to reach
+the API. Password reset reuses Better Auth's existing verification table; no migration is needed.
+
+Run `bun test packages/auth/test/password-reset.test.ts` for the password-reset integration
+tests. They use an in-memory database and mock Resend requests, so no real email is sent.
+
 ## UI Customization
 
 React web apps in this stack share shadcn/ui primitives through `packages/ui`.
@@ -70,7 +85,7 @@ npx shadcn@latest add accordion dialog popover sheet table -c packages/ui
 Import shared components like this:
 
 ```tsx
-import { Button } from "@Forma/ui/components/button";
+import { Button } from '@Forma/ui/components/button'
 ```
 
 ### Add app-specific blocks

@@ -38,7 +38,6 @@ export function createAuth(
     })
 
     if (error) {
-      console.error(`Failed to send ${subject} email`, error)
       throw new Error(`Failed to send ${subject} email`)
     }
 
@@ -48,13 +47,22 @@ export function createAuth(
   return betterAuth({
     database: prismaAdapter(database, {
       provider: 'postgresql',
+      transaction: true,
     }),
     trustedOrigins: [env.CORS_ORIGIN, ...desktopOrigins],
     emailAndPassword: {
       enabled: true,
       autoSignIn: false,
-      sendResetPassword: async ({ user, url, token }) => {
-        await sendAuthEmail(user.email, 'Reset your password', `${url}\n\nReset code: ${token}`)
+      resetPasswordTokenExpiresIn: 60 * 60,
+      revokeSessionsOnPasswordReset: true,
+      sendResetPassword: async ({ user, url }) => {
+        void sendAuthEmail(
+          user.email,
+          'Сброс пароля Forma',
+          `Чтобы задать новый пароль, перейдите по ссылке:\n\n${url}\n\nСсылка действительна 1 час и может быть использована только один раз.\n\nЕсли вы не запрашивали сброс пароля, просто проигнорируйте это письмо.`,
+        ).catch(error => {
+          console.error('Password reset email delivery failed', error)
+        })
       },
       requireEmailVerification: true,
     },

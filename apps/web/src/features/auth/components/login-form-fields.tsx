@@ -5,6 +5,7 @@ import { Checkbox } from '@Forma/ui/components/checkbox'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@Forma/ui/components/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@Forma/ui/components/input-group'
 import { IconEye, IconEyeClosed, IconMail } from '@tabler/icons-react'
+import Link from 'next/link'
 import { Controller, type UseFormReturn } from 'react-hook-form'
 import type { LoginSchema } from '@/features/auth/schemas/login.schema'
 import { useBoolean } from '@/shared/hooks'
@@ -88,7 +89,14 @@ export default function LoginFormFields({ form }: LoginFormFieldsProps) {
           )}
         />
 
-        <Button variant={'link'}>Забыли пароль?</Button>
+        <Button
+          variant="link"
+          render={<Link href="/forgot-password" />}
+          nativeButton={false}
+          disabled={form.formState.isSubmitting}
+        >
+          Забыли пароль?
+        </Button>
       </div>
     </>
   )
