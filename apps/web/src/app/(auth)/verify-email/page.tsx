@@ -33,7 +33,7 @@ function VerifyEmailForm() {
     }
 
     toast.success('Почта подтверждена')
-    router.replace('/dashboard')
+    router.replace('/get-start')
     router.refresh()
   }
 
