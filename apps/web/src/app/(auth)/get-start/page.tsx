@@ -9,6 +9,7 @@ import {
 } from '@Forma/ui/components/card'
 import { Input } from '@Forma/ui/components/input'
 import { IconBuilding, IconUsers } from '@tabler/icons-react'
+import Link from 'next/link'
 
 export default function GetStart() {
   return (
@@ -45,7 +46,12 @@ export default function GetStart() {
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto">
-            <Button fullWidth type="submit">
+            <Button
+              render={<Link href={'/get-start/create-organization'} />}
+              nativeButton
+              fullWidth
+              type="submit"
+            >
               Создать организацию
             </Button>
           </CardContent>

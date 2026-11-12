@@ -6,11 +6,11 @@ export const organizationSetupSchema = z.object({
   name: z
     .string()
     .check(
-      z.minLength(2, 'Name must be at least 2 characters'),
-      z.maxLength(100, 'Name must not exceed 100 characters'),
+      z.minLength(2, 'Имя должно состоять как минимум из 2 символов'),
+      z.maxLength(100, 'Имя не должно превышать 100 символов'),
     ),
 
-  bin: z.string().check(z.regex(BIN_REGEX, 'BIN must contain exactly 12 digits')),
+  bin: z.string().check(z.regex(BIN_REGEX, 'BIN должен состоять ровно из 12 цифр')),
 
   address: z.optional(z.string()),
 })
