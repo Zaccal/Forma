@@ -1,3 +1,4 @@
+import Helment from '@/features/auth/components/shell/helmet'
 import { Button } from '@Forma/ui/components/button'
 import {
   Card,
@@ -12,12 +13,10 @@ import { IconBuilding, IconUsers } from '@tabler/icons-react'
 export default function GetStart() {
   return (
     <div className="w-full max-w-2xl min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">Добро пожаловать в Forma!</h2>
-        <p className="text-muted-foreground">
-          Давайте подготовим ваше рабочее место. У вас есть приглашение в какую-нибудь организацию?
-        </p>
-      </div>
+      <Helment
+        title="Добро пожаловать в Forma!"
+        description="Давайте подготовим ваше рабочее место. У вас есть приглашение в какую-нибудь организацию?"
+      />
 
       <div className="mt-8 grid xl:grid-cols-2 gap-4">
         <Card>

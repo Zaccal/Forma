@@ -1,6 +1,7 @@
 'use client'
 
 import ResetPasswordFormFields from '@/features/auth/components/reset-password-form-fields'
+import Helment from '@/features/auth/components/shell/helmet'
 import {
   resetPasswordSchema,
   type ResetPasswordSchema,
@@ -58,16 +59,14 @@ function ResetPasswordForm() {
 
   return (
     <div className="w-full max-w-md min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">
-          {isInvalidLink ? 'Ссылка недействительна' : 'Новый пароль'}
-        </h2>
-        <p className="text-muted-foreground" role={isInvalidLink ? 'alert' : undefined}>
-          {isInvalidLink
+      <Helment
+        title={isInvalidLink ? 'Ссылка недействительна' : 'Новый пароль'}
+        description={
+          isInvalidLink
             ? 'Ссылка для сброса пароля недействительна или срок её действия истёк. Запросите новую ссылку.'
-            : 'Используйте от 8 до 128 символов, включая латинские буквы, цифры и спецсимвол.'}
-        </p>
-      </div>
+            : 'Используйте от 8 до 128 символов, включая латинские буквы, цифры и спецсимвол.'
+        }
+      />
 
       {isInvalidLink ? (
         <Button render={<Link href="/forgot-password" />} nativeButton={false} fullWidth>

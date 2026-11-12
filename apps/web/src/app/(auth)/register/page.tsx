@@ -1,6 +1,7 @@
 'use client'
 
 import RegisterFormFields from '@/features/auth/components/register-form-fields'
+import Helment from '@/features/auth/components/shell/helmet'
 import { registerSchema, type RegisterSchema } from '@/features/auth/schemas/register.schema'
 import { googleAuthService } from '@/features/auth/services/social-auth'
 import { authClient } from '@/lib/auth-client'
@@ -46,10 +47,10 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full max-w-md min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">Добро пожаловать!</h2>
-        <p className="text-muted-foreground">Добро пожаловать! Заполните данные для регистрации.</p>
-      </div>
+      <Helment
+        title="Добро пожаловать!"
+        description="Добро пожаловать! Заполните данные для регистрации."
+      />
       <form onSubmit={form.handleSubmit(submitHandler)} id="login-form">
         <div className="space-y-4">
           <RegisterFormFields form={form} />

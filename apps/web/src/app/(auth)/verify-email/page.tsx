@@ -1,5 +1,6 @@
 'use client'
 
+import Helment from '@/features/auth/components/shell/helmet'
 import VerifyEmailFormFields from '@/features/auth/components/verify-email-form-fields'
 import { otpSchema, type OtpSchema } from '@/features/auth/schemas/otp.schema'
 import { authClient } from '@/lib/auth-client'
@@ -62,12 +63,10 @@ function VerifyEmailForm() {
 
   return (
     <div className="w-full max-w-md min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">Подтвердите почту</h2>
-        <p className="text-muted-foreground">
-          Мы отправили шестизначный код на вашу почту. Введите его, чтобы продолжить.
-        </p>
-      </div>
+      <Helment
+        title="Подтвердите почту"
+        description="Мы отправили шестизначный код на вашу почту. Введите его, чтобы продолжить."
+      />
       <form id="verify-form" onSubmit={form.handleSubmit(verifyHandler)} className="space-y-4">
         <VerifyEmailFormFields form={form} />
       </form>

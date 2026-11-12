@@ -1,6 +1,7 @@
 'use client'
 
 import LoginFormFields from '@/features/auth/components/login-form-fields'
+import Helment from '@/features/auth/components/shell/helmet'
 import { loginSchema, type LoginSchema } from '@/features/auth/schemas/login.schema'
 import { googleAuthService } from '@/features/auth/services/social-auth'
 import { authClient } from '@/lib/auth-client'
@@ -55,10 +56,10 @@ export default function LoginPage() {
 
   return (
     <div className="w-full max-w-md min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">С возвращением!</h2>
-        <p className="text-muted-foreground">С возвращением! Пожалуйста, введите ваши данные.</p>
-      </div>
+      <Helment
+        title="С возвращением!"
+        description="С возвращением! Пожалуйста, введите ваши данные."
+      />
       <form onSubmit={form.handleSubmit(submitHandler)} id="login-form">
         <div className="space-y-4">
           <LoginFormFields form={form} />

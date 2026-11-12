@@ -1,5 +1,6 @@
 'use client'
 
+import Helment from '@/features/auth/components/shell/helmet'
 import {
   forgotPasswordSchema,
   type ForgotPasswordSchema,
@@ -50,16 +51,14 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="w-full max-w-md min-w-0">
-      <div className="mb-8 space-y-3 sm:space-y-4">
-        <h2 className="text-2xl font-black uppercase sm:text-3xl">
-          {isSent ? 'Проверьте почту' : 'Забыли пароль?'}
-        </h2>
-        <p className="text-muted-foreground" role={isSent ? 'status' : undefined}>
-          {isSent
+      <Helment
+        title={isSent ? 'Проверьте почту' : 'Забыли пароль?'}
+        description={
+          isSent
             ? 'Если аккаунт с этой почтой существует, мы отправим ссылку для сброса пароля. Проверьте входящие и папку «Спам». Ссылка действительна 1 час.'
-            : 'Введите почту вашего аккаунта. Мы отправим ссылку для создания нового пароля.'}
-        </p>
-      </div>
+            : 'Введите почту вашего аккаунта. Мы отправим ссылку для создания нового пароля.'
+        }
+      />
 
       {isSent ? (
         <Button type="button" variant="outline" fullWidth onClick={() => setIsSent(false)}>
